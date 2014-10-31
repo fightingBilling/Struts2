@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="struts2-common" extends="struts-default" namespace="/dream"><!-- namespace不写就默认为"" -->
+		<interceptors>
+    		<interceptor name="loginInterceptor" class="com.somnus.interceptor.LoginInterceptor"></interceptor>
+    		<interceptor-stack name="appInterceptor">
+    			<interceptor-ref name="loginInterceptor"></interceptor-ref>
+            	<interceptor-ref name="defaultStack"></interceptor-ref>
+    		</interceptor-stack>
+    	</interceptors>
+    	
+    	<default-interceptor-ref name="appInterceptor"></default-interceptor-ref>
+    	
+		<global-results>
+    		<result name="resource404">/demo/error.jsp</result>
+    		<result name="login">/demo/register.jsp</result>
+    	</global-results> 
+    	
+    	<global-exception-mappings>
+    		<exception-mapping result="resource404" exception="com.somnus.exception.SystemException"></exception-mapping>
+    	</global-exception-mappings>
+    	
+    	<action name="register" class="com.somnus.action.RegisterAction">  
+    		<exception-mapping result="resource404" exception="com.somnus.exception.SystemException"></exception-mapping>
+            <result name="propertyQuery">/demo/result.jsp</result> 
+            <result name="modelQuery">/demo/result2.jsp</result> 
+            <result name="mapQuery">/demo/result3.jsp</result> 
+            <result name="invalid.token">/demo/invalid.jsp</result>  
+            
+            <interceptor-ref name="loginInterceptor"></interceptor-ref>
+			<interceptor-ref name="token"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+        </action>
+        
+        <action name="upload" class="com.somnus.action.UploadAction">
+    		<result name="success">/uploadsuc.jsp</result>
+    	</action>  
+    	
+    	<action name="download" class="com.somnus.action.DownloadAction">
+    		<result name="success" type="stream">
+    			<param name="contentType">text/plain</param>
+    			<param name="contentDisposition">attachment;filename="${filename}"</param>
+    			<param name="inputName">downloadFile</param>
+    			<param name="bufferSize">1024</param>
+    		</result>
+    	</action>  
+    	
+    	<action name="ognl" class="com.somnus.action.OgnlAction">
+    		<result name="success">/ognlsuc.jsp</result>
+    	</action> 
+    	
+    	<!-- ResultType -->
+    	<action name="dispatcher" class="com.somnus.action.ResultTypeDispatcherAction"><!-- 相当于request.getRequestDispatcher("path").forward(request, response)还是当前地址 -->
+    	 <result name="success">/login.jsp</result>
+    	</action> 
+    	<action name="redirect" class="com.somnus.action.ResultTypeRedirectAction"><!-- 相当于response.sendRedirect(“path”);请求新地址 重定向到一个URL-->
+    	 <result name="success"   type="redirect">/index.jsp</result><!-- 如果是action必须加上.action 有命名空间也得加上 -->
+    	</action>
+    	<action name="chain" class="com.somnus.action.ResultTypeChainAction">
+    	 <result name="success"  type="chain"><!-- 跳转到最终结果资源页面 但是地址栏还是当前action -->
+    	 <param name="namespace">/dream</param>
+    	 <param name="actionName">dispatcher</param>
+    	 <param name="email">${email}</param><!-- 从下个action到页面都能拿到值 -->
+    	 </result>
+    	</action>
+    	<action name="redirectAction" class="com.somnus.action.ResultTypeRedirectactionAction"><!-- 跳转到最终结果资源页面 并且地址栏也是最终的资源页面地址 -->
+    	 <result name="success" type="redirectAction">
+    	 <param name="namespace">/dream</param>
+    	 <param name="actionName">redirect</param>
+    	 <param name="email">${email}</param><!-- 只能传到下一个action中，最终页面拿不到值，因为是redirect -->
+    	 </result>
+    	</action>
+	</package>
+	
+	<!-- *****************************JSON************start********************************** -->
+    <package name="struts2-json"  extends="json-default">  
+        <action name="login" class="com.somnus.action.LoginAction">  
+            <result name="user" type="json">
+            	<param name="excludeProperties">user</param>
+            	<!--
+            	<param name="root">user</param>
+            	-->
+            </result>   
+        </action>
+        
+        <action name="uploadify" class="com.somnus.action.UploadifyAction">  
+            <result name="uploadify" type="json">
+            	<param name="excludeProperties">file,fileContentType,fileFileName</param>
+            </result>   
+        </action>
+        
+        <action name="plus" class="com.somnus.action.PlusAction">  
+            <result name="plus" type="json">   
+            </result>   
+        </action>
+        <action name="baidu" class="com.somnus.action.BaiduAction">  
+            <result name="list"  type="json">   
+            </result>   
+        </action>
+        
+        <action name="region" class="com.somnus.action.RegionAction">
+    		<result name="region" type="json">
+    			<param name="excludeProperties">provinceParam,cityParam</param>
+    		</result>  
+    	</action>  
+        
+        <action name="weather" class="com.somnus.action.WeatherAction">
+    		<result name="suppCity" type="json"></result>  
+    		<result name="suppProvince" type="json"></result>  
+    		<result name="weatherinfo" type="json"></result>  
+    	</action>
+    	
+    	<action name="index" class="com.somnus.action.IndexAction">
+    		<!-- 返回单个值的result -->
+    		<result name="message" type="json"></result>
+    		<!-- 返回UserInfo对象的 -->
+    		<result name="user" type="json"></result>
+    		<!-- 返回List对象的 -->
+    		<result name="list" type="json">
+    			<param name="excludeProperties">message,user,userMap,strList,strMap</param>
+    		</result>
+    		<!-- 返回Map对象的 -->
+    		<result name="map" type="json"></result>
+    		<result name="strlist" type="json"></result>
+    		<result name="strmap" type="json"></result>
+    	</action>
+    	
+    	<action name="getXMLAction" class="com.somnus.action.getXMLAction"/>
+    		
+    </package>  
+    <!-- *****************************JSON************end********************************** -->
+    
+    
+	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true"></constant>
+	<constant name="struts.multipart.saveDir" value="/temp"></constant>
+	<constant name="struts.multipart.maxSize" value="10485760"></constant>
+	
+</struts>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>天气预报</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$.ajax({
+				type: "POST",
+				url: "weather!querySupportProvince.action",
+				dataType: "json",
+				data: {},
+				success: function(data)
+				{
+					$.each(data.provinceMap,function(key,value)
+					{
+						$("#region :input:first").append("<option value="+key+">"+value+"</option>");
+					});
+				}
+			});
+		
+		$("#region :input:first").change(function()
+		{
+			$.ajax({
+				type: "POST",
+				url: "weather!querySupportCity.action",
+				dataType: "json",
+				data: {'provinceParam':$("#region :input:first").val()},
+				success: function(data)
+				{
+					$("#region :input:eq(1)").empty().append("<option value='-1'>请选择</option>");
+					$.each(data.cityMap,function(key,value)
+					{
+						$("#region :input:eq(1)").append("<option value="+key+">"+value+"</option>");
+					});
+				}
+			});
+		});
+		
+		$("#region :input:eq(1)").change(function()
+		{
+			$.ajax({
+				type: "POST",
+				url: "weather!queryWeatherbyCityName.action",
+				dataType: "json",
+				data: {'cityParam':$("#region :input:eq(1)").val()},
+				success: function(data)
+				{
+					$("div.weather").empty();
+					$.each(data.weatherMap,function(key,value)
+					{
+						if(key=="beginTendencyJpg"||key=="beginTendencyJpg2"||key=="beginTendencyJpg3"||
+						key=="endTendencyJpg"||key=="endTendencyJpg2"||key=="endTendencyJpg3")
+						{
+							$("div.weather").append("<p><img src=images/weather/"+value+" /></p>");
+						}
+						else
+						{
+							$("div.weather").append("<p>"+value+"</p>");
+						}
+					});
+				}
+			});
+		});
+	});
+	</script>
+  </head>
+  
+  <body>
+    <form id="region" method="post">
+    	地域:
+    	<select name="province" id="province"  style="width:70px">
+			<option value="-1">请选择</option>
+		</select>
+		<select name="city"  id="city"  style="width:70px">
+			<option value="-1">请选择</option>
+		</select>
+    </form>
+    <div class="weather" style="width:1000px;height:1000px;border:1px solid #000">
+    
+    </div>
+  </body>
+</html>
