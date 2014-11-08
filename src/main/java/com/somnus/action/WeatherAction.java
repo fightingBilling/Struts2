@@ -1,11 +1,23 @@
 package com.somnus.action;
 
 import java.util.Map;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
 import com.opensymphony.xwork2.ActionSupport;
 import com.somnus.webservice.weather.WeatherService;
 import com.somnus.webservice.weather.WeatherServiceImpl;
 
-@SuppressWarnings("serial")
+@ParentPackage("json-default")
+@Namespace("/")
+@Action(
+		results = {
+				@Result(name = "suppCity", type = "json"),
+				@Result(name = "suppProvince", type = "json"),
+				@Result(name = "weatherinfo", type = "json")
+		}
+)
 public class WeatherAction extends ActionSupport{
 	private String provinceParam;
 	private String cityParam;

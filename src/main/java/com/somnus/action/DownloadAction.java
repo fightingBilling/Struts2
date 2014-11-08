@@ -3,10 +3,22 @@ package com.somnus.action;
 import java.io.InputStream;
 
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-@SuppressWarnings("serial")
+@ParentPackage("struts2-common")
+@Namespace("/dream")
+@Action(
+		value="download",
+		results = {
+				@Result(name = "success", type="stream",
+							params={"contentType","text/plain","contentDisposition","attachment;filename='${filename}'","inputName","downloadFile","bufferSize","1024"})
+				}
+)
 public class DownloadAction extends ActionSupport
 {
 	private int num;
@@ -32,7 +44,6 @@ public class DownloadAction extends ActionSupport
 		
 	}
 	
-	@Override
 	public String execute() throws Exception
 	{
 

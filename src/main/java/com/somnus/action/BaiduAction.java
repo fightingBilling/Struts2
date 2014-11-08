@@ -2,11 +2,16 @@ package com.somnus.action;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
 import com.opensymphony.xwork2.ActionSupport;
 import com.somnus.util.HanYu;
 
-@SuppressWarnings("serial")
+@ParentPackage("json-default")
+@Namespace("/")
+@Action(results = {@Result(name = "baidu", type = "json")})
 public class BaiduAction extends ActionSupport
 {
 	private String text;
@@ -32,7 +37,7 @@ public class BaiduAction extends ActionSupport
 					count++;
 				}
 			}
-			return "list";
+			return "baidu";
 		}
 
 	}

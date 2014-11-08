@@ -12,12 +12,19 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.somnus.model.Student;
 import com.somnus.model.User;
 
-@SuppressWarnings("serial")
+@ParentPackage("struts2-common")
+@Namespace("/dream")
+@Action(results = {@Result(name = "success", location = "/ognlsuc.jsp")})
 public class OgnlAction extends ActionSupport 
 {
 	private String email;
@@ -34,8 +41,6 @@ public class OgnlAction extends ActionSupport
 		return "这是LoginAction中的一个静态的方法";
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
 	public String execute() throws Exception {
 		testList.add("list1");
 		testList.add("list2");

@@ -3,10 +3,15 @@ package com.somnus.action;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
 import com.opensymphony.xwork2.ActionSupport;
 
-@SuppressWarnings("serial")
+@ParentPackage("json-default")
+@Namespace("/")
+@Action(results = {@Result(name = "region", type = "json",params={"excludeProperties","provinceParam,cityParam"})})
 public class RegionAction extends ActionSupport
 {
 	private  Map<String,String> provinceMap ;

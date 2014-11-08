@@ -1,8 +1,14 @@
 package com.somnus.action;
 
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
 import com.opensymphony.xwork2.ActionSupport;
 
-@SuppressWarnings("serial")
+@ParentPackage("json-default")
+@Namespace("/")
+@Action(results = {@Result(name = "plus", type = "json")})
 public class PlusAction extends ActionSupport
 {
 	private String param1;

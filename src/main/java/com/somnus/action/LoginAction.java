@@ -1,9 +1,15 @@
 package com.somnus.action;
 
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
 import com.opensymphony.xwork2.ActionSupport;
 import com.somnus.model.User;
 
-@SuppressWarnings("serial")
+@ParentPackage("json-default")
+@Namespace("/")
+@Action(results = {@Result(name = "user", type = "json",params={"excludeProperties","user"})})
 public class LoginAction extends ActionSupport
 {
 

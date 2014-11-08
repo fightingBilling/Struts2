@@ -1,15 +1,30 @@
 package com.somnus.action;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+
 import com.opensymphony.xwork2.ActionSupport;
 import com.somnus.model.User;
 
-@SuppressWarnings("serial")
+@ParentPackage("json-default")
+@Namespace("/")
+@Action(
+		results = {
+				@Result(name = "message", type = "json"),
+				@Result(name = "user", type = "json"),
+				@Result(name = "list", type = "json"),
+				@Result(name = "map", type = "json"),
+				@Result(name = "strlist", type = "json"),
+				@Result(name = "strmap", type = "json")
+		}
+)
 public class IndexAction extends ActionSupport
 {
 	private String message; // 使用json返回单个值

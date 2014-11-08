@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <form id="fm" name="fm" action="dream/register!propertyQuery.action" method="post">
+    <form id="fm" name="fm" action="<%=path %>/dream/register!propertyQuery.action" method="post">
     username:<input type="text" name="username"><br>
     password:<input type="password" name="password">
     age:<input type="text" name="age">
@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <input type="submit" value="submit">
     </form>
     
-    <form  id="fm2" name="fm2" action="dream/register!modelQuery.action" method="post">
+    <form  id="fm2" name="fm2" action="<%=path %>/dream/register!modelQuery.action" method="post">
     username:<input type="text" name="user.username"><br>
     password:<input type="password" name="user.password"><br>
     age:<input type="text" name="user.age">
@@ -56,7 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <input type="submit" value="submit">
     </form>
     
-     <form id="fm3" name="fm3"  action="dream/register!mapQuery.action" method="post">
+     <form id="fm3" name="fm3"  action="<%=path %>/dream/register!mapQuery.action" method="post">
     username:<input type="text" name="paramMap.username"><br>
     password:<input type="password" name="paramMap.password"><br>
     age:<input type="text" name="paramMap.age">

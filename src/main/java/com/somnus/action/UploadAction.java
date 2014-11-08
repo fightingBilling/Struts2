@@ -5,15 +5,18 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-
 import javax.servlet.http.HttpServletRequest;
-
 import org.apache.struts2.ServletActionContext;
-
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
 import com.opensymphony.xwork2.ActionSupport;
 import com.somnus.util.DateUtil;
 
-@SuppressWarnings("serial")
+@ParentPackage("struts2-common")
+@Namespace("/dream")
+@Action(results = {@Result(name = "success", location = "/uploadsuc.jsp")})
 public class UploadAction extends ActionSupport
 {
 	/*
@@ -58,8 +61,7 @@ public class UploadAction extends ActionSupport
 		this.fileContentType = fileContentType;
 	}
 
-	@SuppressWarnings("deprecation")
-	@Override
+	
 	public String execute() throws Exception
 	{
 		HttpServletRequest request = ServletActionContext.getRequest();

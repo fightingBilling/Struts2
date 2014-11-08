@@ -1,21 +1,41 @@
 package com.somnus.action;
 
 import java.util.Map;
-
-
 /*import javax.servlet.ServletContext;*/
 import javax.servlet.http.HttpServletRequest;
 /*import javax.servlet.http.HttpServletResponse;*/
 import javax.servlet.http.HttpSession;
-
 import org.apache.struts2.ServletActionContext;
-
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.convention.annotation.ExceptionMapping;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.somnus.exception.SystemException;
 import com.somnus.model.User;
 
-@SuppressWarnings("serial")
+@ParentPackage("struts2-common")
+@Namespace("/dream")
+@Action( //表示请求的Action及处理方法   
+        value="register",  //表示action的请求名称   
+        results={  //表示结果跳转   
+                @Result(name="propertyQuery",location="/demo/result.jsp"),  
+                @Result(name="modelQuery",location="/demo/resul2t.jsp"),  
+                @Result(name="mapQuery",location="/demo/result3.jsp"),
+                @Result(name="invalid.token",location="/demo/invalid.jsp")  
+        },  
+        interceptorRefs={ //表示拦截器引用   
+                @InterceptorRef("defaultStack"),  
+                @InterceptorRef("token"),
+                @InterceptorRef("loginInterceptor")
+        },  
+        exceptionMappings={  //映射映射声明   
+                @ExceptionMapping(exception="com.somnus.exception.SystemException",result="resource404")  
+        }  
+)  
 public class RegisterAction extends ActionSupport
 {
 	private String username;
@@ -25,7 +45,7 @@ public class RegisterAction extends ActionSupport
 	private User user;
 	/*---------------------------------------------*/
 	private Map<String, Object> paramMap;
-
+	{}
 	public String propertyQuery() throws Exception
 	{
 		HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);
@@ -82,6 +102,7 @@ public class RegisterAction extends ActionSupport
 		}
 		return "modelQuery";
 	}
+	
 	public String mapQuery() throws Exception
 	{
 		HttpServletRequest request = (HttpServletRequest) ActionContext.getContext().get(ServletActionContext.HTTP_REQUEST);

@@ -3,14 +3,18 @@ package com.somnus.action;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
-
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
 import com.opensymphony.xwork2.ActionSupport;
 import com.somnus.util.DateUtil;
 
-@SuppressWarnings("serial")
+@ParentPackage("json-default")
+@Namespace("/")
+@Action(results = {@Result(name = "uploadify", type = "json",params={"excludeProperties","file,fileContentType,fileFileName"})})
 public class UploadifyAction extends ActionSupport
 {
 	/*
