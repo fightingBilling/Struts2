@@ -77,7 +77,7 @@
 	</package>
 	
 	<!-- *****************************JSON************start********************************** -->
-    <package name="struts2-json"  extends="json-default">  
+    <package name="struts2-json"  extends="json-default" >  
         <action name="login" class="com.somnus.action.LoginAction">  
             <result name="user" type="json">
             	<param name="excludeProperties">user</param>
@@ -129,12 +129,8 @@
     		<result name="strmap" type="json"></result>
     	</action>
     	
-    	<action name="getXMLAction" class="com.somnus.action.getXMLAction"/>
-    		
     </package>  
     <!-- *****************************JSON************end********************************** -->
-    
-    
 	<constant name="struts.i18n.encoding" value="UTF-8"></constant>
 	<constant name="struts.ognl.allowStaticMethodAccess" value="true"></constant>
 	<constant name="struts.multipart.saveDir" value="/temp"></constant>
