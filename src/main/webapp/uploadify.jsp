@@ -6,11 +6,11 @@
 <%pageContext.setAttribute("baseURL", request.getContextPath()); %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>struts2 +jquey uploadify3.2 实现多文件上传，可预览、删除、排序</title>
-<script src="${baseURL}/jquery-ui-1.10.4.custom/js/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="${baseURL}/js/jquery-ui-1.10.4.custom/js/jquery-1.10.2.js" type="text/javascript"></script>
 <script src="${baseURL}/js/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
-<script src="${baseURL}/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
-<link   href="${baseURL}/js/uploadify//uploadify.css" rel="stylesheet" type="text/css" >
-<link   href="${baseURL}/jquery-ui-1.10.4.custom/development-bundle/themes/base/jquery.ui.all.css"  rel="stylesheet" type="text/css" >
+<script src="${baseURL}/js/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
+<link   href="${baseURL}/js/uploadify/uploadify.css" rel="stylesheet" type="text/css" >
+<link   href="${baseURL}/js/jquery-ui-1.10.4.custom/development-bundle/themes/base/jquery.ui.all.css"  rel="stylesheet" type="text/css" >
 <style type="text/css">
 	div.show{
 		width:800px;
