@@ -21,7 +21,12 @@
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
-
+		<!-- 加入fastjson依赖包 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.1.37</version>
+		</dependency>
 		<!-- servlet & jsp -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
