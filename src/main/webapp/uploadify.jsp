@@ -1,16 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<%pageContext.setAttribute("baseURL", request.getContextPath()); %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>struts2 +jquey uploadify3.2 实现多文件上传，可预览、删除、排序</title>
-<script src="${baseURL}/js/jquery-ui-1.10.4.custom/js/jquery-1.10.2.js" type="text/javascript"></script>
-<script src="${baseURL}/js/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
-<script src="${baseURL}/js/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
-<link   href="${baseURL}/js/uploadify/uploadify.css" rel="stylesheet" type="text/css" >
-<link   href="${baseURL}/js/jquery-ui-1.10.4.custom/development-bundle/themes/base/jquery.ui.all.css"  rel="stylesheet" type="text/css" >
+<script src="<%=path %>/js/jquery-ui-1.10.4.custom/js/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="<%=path %>/js/uploadify/jquery.uploadify.min.js" type="text/javascript"></script>
+<script src="<%=path %>/js/jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
+<link   href="<%=path %>/js/uploadify/uploadify.css" rel="stylesheet" type="text/css" >
+<link   href="<%=path %>/js/jquery-ui-1.10.4.custom/development-bundle/themes/base/jquery.ui.all.css"  rel="stylesheet" type="text/css" >
 <style type="text/css">
 	div.show{
 		width:800px;
@@ -41,8 +44,8 @@
 			}
 		});
 		$("#uploadFile").uploadify({  
-			swf: '${baseURL}/js/uploadify/uploadify.swf',  		//[必须设置]swf的路径
-			uploader: '${baseURL}/uploadify!upload.action',  //[必须设置]上传文件触发的url
+			swf: '<%=path %>/js/uploadify/uploadify.swf',  		//[必须设置]swf的路径
+			uploader: '<%=path %>/uploadify!upload.action',  //[必须设置]上传文件触发的url
 			width: 120,  										//设置浏览按钮的宽度 ，默认值：110
 			height:25,											//设置浏览按钮的高度， 默认值：30。
 			fileObjName:'file',  								//上传文件name
@@ -62,7 +65,7 @@
 					+ ' - 修改日期: ' + file.modificationdate+ ' - 文件状态: ' + file.filestatus+ ' - 服务器端消息: ' + data
 					+ ' - 是否上传成功: ' + response); */
 					var url = eval('(' + data + ')');  
-					$("div.show ul").append("<li><img src=${baseURL}/upload/"+url.newImgPath[0]+" width='220px' height='250px' /><li>");
+					$("div.show ul").append("<li><img src=<%=path %>/upload/"+url.newImgPath[0]+" width='220px' height='250px' /><li>");
 			},
 			onFallback:function(){  
 					alert("您未安装FLASH控件，无法上传图片！请安装FLASH控件后再试。");  
