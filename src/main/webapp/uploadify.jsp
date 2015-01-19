@@ -69,14 +69,13 @@
 			},
 			//当每个文件添加至队列后触发
 			onSelect :function(file){	
-					/* alert( 'id: ' + file.id+ ' - 索引: ' + file.index+ ' - 文件名: ' + file.name
+					alert( 'id: ' + file.id+ ' - 索引: ' + file.index+ ' - 文件名: ' + file.name
 						+ ' - 文件大小: ' + file.size+ ' - 类型: ' + file.type+ ' - 创建日期: ' + file.creationdate
-						+ ' - 修改日期: ' + file.modificationdate+ ' - 文件状态: ' + file.filestatus); */
+						+ ' - 修改日期: ' + file.modificationdate+ ' - 文件状态: ' + file.filestatus);
 			},
 			//当队列中的所有文件全部完成上传时触发
 			onQueueComplete : function(stats){
-				/* alert( '成功上传的文件数: ' + stats.uploadsSuccessful
-					+ ' - 上传出错的文件数: ' + stats.uploadsErrored); */
+				alert( '成功上传的文件数: ' + stats.uploadsSuccessful + ' - 上传出错的文件数: ' + stats.uploadsErrored);
 			},
 			//当文件选定发生错误时触发
 			onSelectError:function(file, errorCode, errorMsg){  
