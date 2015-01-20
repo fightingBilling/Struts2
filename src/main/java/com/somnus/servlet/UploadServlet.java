@@ -16,13 +16,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.convention.annotation.Action;
-import org.apache.struts2.convention.annotation.Namespace;
-import org.apache.struts2.convention.annotation.ParentPackage;
-import org.apache.struts2.convention.annotation.Result;
 
-import com.opensymphony.xwork2.ActionSupport;
 import com.somnus.util.DateUtil;
 /** 
  *  
@@ -69,22 +63,19 @@ public class UploadServlet extends HttpServlet {
             //可以上传多个文件  
             List<FileItem> list = (List<FileItem>)upload.parseRequest(request);  
               
-            for(FileItem item : list)  
-            {  
+            for(FileItem item : list){  
                 //获取表单的属性名字  
                 String name = item.getFieldName();  
                   
                 //如果获取的 表单信息是普通的 文本 信息  
-                if(item.isFormField())  
-                {                     
+                if(item.isFormField()){                     
                     //获取用户具体输入的字符串 ，名字起得挺好，因为表单提交过来的是 字符串类型的  
                     String value = item.getString() ;  
                       
                     request.setAttribute(name, value);  
                 }  
                 //对传入的非 简单的字符串进行处理 ，比如说二进制的 图片，电影这些  
-                else  
-                {  
+                else{  
                     /** 
                      * 以下三步，主要获取 上传文件的名字 
                      */  
@@ -118,8 +109,7 @@ public class UploadServlet extends HttpServlet {
                     System.out.println("获取上传文件的总共的容量："+item.getSize());  
   
                     // in.read(buf) 每次读到的数据存放在   buf 数组中  
-                    while( (length = in.read(buf) ) != -1)  
-                    {  
+                    while( (length = in.read(buf) ) != -1){  
                         //在   buf 数组中 取出数据 写到 （输出流）磁盘上  
                         out.write(buf, 0, length);  
                     }  
@@ -135,8 +125,7 @@ public class UploadServlet extends HttpServlet {
         }  
         catch (Exception e) {  
             // TODO Auto-generated catch block  
-              
-            //e.printStackTrace();  
+            e.printStackTrace();  
         }  
         request.getRequestDispatcher("uploadServletSuccess.jsp").forward(request, response);  
 	}

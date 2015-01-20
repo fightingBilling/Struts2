@@ -47,8 +47,7 @@ public class AvatarServlet extends HttpServlet {
 			String root = request.getRealPath("/upload");
 			//如果上传目录不存在,自动创建一个
 			File dirFile = new File(root);
-			if (!dirFile.exists()) 
-			{   
+			if (!dirFile.exists()){
 				dirFile.mkdir();   
 			}
 			FileItemFactory factory = new DiskFileItemFactory();
@@ -76,7 +75,7 @@ public class AvatarServlet extends HttpServlet {
 						inputStream.close();
 					}
 					//如果是原始图片 file 域的名称或者以默认的头像域名称的部分“__avatar”打头(默认的头像域名称：__avatar1,2,3...，可在插件配置参数中自定义，参数名：avatar_field_names)
-					else if ( isSourcePic || fieldName.startsWith("__avatar") ){
+					else if( isSourcePic || fieldName.startsWith("__avatar") ){
 						//取服务器时间(精确到毫秒)作为部分文件名，确保文件名无重复。
 						String time = DateUtil.getCurrDate("yyyyMMddHHmmssSSS");
 						//上传路劲+文件名
@@ -84,8 +83,7 @@ public class AvatarServlet extends HttpServlet {
 						//文件名
 						String filename = "avatar" + avatarNumber + "_" + time + ".jpg";
 						//原始图片（默认的 file 域的名称是__source，可在插件配置参数中自定义。参数名：src_field_name）。
-						if( isSourcePic )
-						{
+						if( isSourcePic ){
 							//文件名，如果是本地或网络图片为原始文件名、如果是摄像头拍照则为 *FromWebcam.jpg
 							String sourceFileName = fileItem.getName();	
 							//原始文件的扩展名(不包含“.”)
@@ -96,8 +94,7 @@ public class AvatarServlet extends HttpServlet {
 							json.setSourceUrl("/upload/" + filename);
 						}
 						//头像图片（默认的 file 域的名称：__avatar1,2,3...，可在插件配置参数中自定义，参数名：avatar_field_names）。
-						else
-						{
+						else{
 							/*json.getAvatarUrls().add(virtualPath);*/
 							json.getAvatarUrls().add("/upload/" + filename);
 							avatarNumber++;
@@ -120,8 +117,7 @@ public class AvatarServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
-			if ( json.getSourceUrl() != null )
-			{
+			if (json.getSourceUrl() != null ){
 				json.setSourceUrl(json.getSourceUrl()+initParams);
 			}
 			json.setMsg("Success");
