@@ -14,8 +14,28 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>struts2</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>*.action</url-pattern>
 	</filter-mapping>
+	
+	<!-- UploadServlet上传 -->
+	<servlet>
+		<servlet-name>UploadServlet</servlet-name>
+		<servlet-class>com.somnus.servlet.UploadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UploadServlet</servlet-name>
+		<url-pattern>/uploadServlet</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 头像裁剪上传 -->
+	<servlet>
+		<servlet-name>AvatarServlet</servlet-name>
+		<servlet-class>com.somnus.servlet.AvatarServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AvatarServlet</servlet-name>
+		<url-pattern>/avatarServlet</url-pattern>
+	</servlet-mapping>
 
 
 </web-app>

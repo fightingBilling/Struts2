@@ -6,33 +6,34 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>OGNL</title>
-<style type="text/css">
-table
-  {
-  border-collapse:collapse;
-  width:50%;
-  text-align:center;
-  }
-
-table, td, th
-  {
-  border:1px solid #6666FF;
-  }
-  div
-  {
-  	width:500px;
-  	height:200px;
-  	border:1px solid  black;
-  	background-color: pink;
-  }
-font
-  {
-  	background-color:yellow;
-  }
-</style>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<title>OGNL</title>
 </head>
+<style type="text/css">
+	table{
+	  border-collapse:collapse;
+	  width:50%;
+	  text-align:center;
+	}
+	
+	table, td, th{
+	  border:1px solid #6666FF;
+	}
+	div{
+	  width:500px;
+	  height:200px;
+	  border:1px solid  black;
+	  background-color: pink;
+	}
+	font{
+	  background-color:yellow;
+	 }
+</style>
 <body>
 	<div>
 		value stack contents   <font id="a">ognl【值栈】《s:property value="type"/》或$ {type}</font> <hr/>

@@ -7,8 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
-    <title>json示例</title>
+    <title>json+struts2示例</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -38,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$("#getMessage").click(function()
 		{
 			$.ajax({
-				url:"index!returnMessage.action",
+				url:"<%=path%>/index!returnMessage.action",
 				type:"POST",
 				dataType:"json",
 				success:function(data)
@@ -55,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$("#getUser").click(function()
 		{
 			$.ajax({
-				url:"index!returnUser.action",
+				url:"<%=path%>/index!returnUser.action",
 				type:"POST",
 				dataType:"json",
 				success:function(data)
@@ -74,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$("#getList").click(function()
 		{
 			 $.ajax({
-				url:"index!returnList.action",
+				url:"<%=path%>/index!returnList.action",
 				type:"POST",
 				dataType:"json",
 				success:function(data)
@@ -96,7 +95,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 	$("#getStrList").click(function()
 		{
 			 $.ajax({
-				url:"index!returnStrList.action",
+				url:"<%=path%>/index!returnStrList.action",
 				type:"POST",
 				dataType:"json",
 				success:function(data)
@@ -116,7 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$("#getMap").click(function()
 		{
 			$.ajax({
-				url:"index!returnMap.action",
+				url:"<%=path%>/index!returnMap.action",
 				type:"POST",
 				dataType:"json",
 				success:function(data)
@@ -138,7 +137,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		 $("#getStrMap").click(function()
 		{
 			$.ajax({
-				url:"index!returnStrMap.action",
+				url:"<%=path%>/index!returnStrMap.action",
 				type:"POST",
 				dataType:"json",
 				success:function(data)

@@ -4,20 +4,16 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
     <base href="<%=basePath%>">
-    
     <title>Struts2+jQuery+JSON 登陆验证<s:property value="email"/>|${param.email}|<s:property value="#parameters.email"/></title>
-    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-
     <style type="text/css">   
         .decorate{               /*控制文本框样式*/  
             border:1px solid #FF0000;   
@@ -45,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					// 数据发送方式
 					type: "POST",
 					// 后台处理程序
-					url: "login.action",
+					url: "<%=path%>/login.action",
 					// 接受数据格式
 					dataType: "JSON",
 					// 要传递的数据
@@ -60,7 +56,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             
         });   
     </script>   
-
   </head>
   
   <body>

@@ -8,9 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    
-    <title>My JSP 'upload.jsp' starting page</title>
-    
+    <title>下载示例</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -19,11 +17,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
   </head>
   
   <body> 
-   <a href="dream/download.action?num=1">下载1</a>
-   <a href="dream/download.action?num=2">下载2</a>
+   <a href="<%=path%>/dream/download.action?num=1">下载1</a>
+   <a href="<%=path%>/dream/download.action?num=2">下载2</a>
   </body>
 </html>
