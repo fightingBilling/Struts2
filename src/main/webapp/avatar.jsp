@@ -36,7 +36,6 @@
 							break;
 						case 2 : 
 							alert("已成功加载图片到编辑面板。");
-							document.getElementById("upload").style.display = "inline";
 							break;
 						case 3 :
 							if(msg.type == 0){
@@ -61,9 +60,6 @@
 						}
 					}
 				);
-				document.getElementById("upload").onclick=function(){
-					swf.call("upload");
-				};
             });
     	});
     </script>   
