@@ -62,11 +62,11 @@
 				);
             });
     	});
-    </script>   
+    </script>
   <body>
 	<div style="width:632px;margin:0 auto;text-align:center">
 		<h1 style="text-align:center">富头像上传编辑器演示</h1>
-		<div>
+		<div style="border:1px solid #888">
 			<p id="swfContainer">
 				本组件需要安装Flash Player后才可使用，请从<a href="http://www.adobe.com/go/getflashplayer">这里</a>下载安装。
 			</p>
