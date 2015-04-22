@@ -100,7 +100,7 @@ public class AvatarServlet extends HttpServlet {
 							avatarNumber++;
 						}
 						try {
-							fileItem.write( new File(request.getRealPath("/upload"),filename) );
+							fileItem.write( new File(root,filename) );
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
