@@ -3,20 +3,23 @@ package com.somnus.action;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
+
 import com.opensymphony.xwork2.ActionSupport;
 import com.somnus.util.DateUtil;
 
 @ParentPackage("json-default")
 @Namespace("/")
 @Action(results = {@Result(name = "uploadify", type = "json",params={"excludeProperties","file,fileContentType,fileFileName"})})
-public class UploadifyAction extends ActionSupport
-{
+public class UploadifyAction extends ActionSupport{
 	/*
 	 * 成员变量的名称不能随意更改, 
 	 * private File file; 						变量的名称必须和jsp中上传文件标签中的name属性的值一致.
@@ -31,12 +34,16 @@ public class UploadifyAction extends ActionSupport
 	
 	private List<String> newImgPath = new ArrayList<String>();
 
-	@SuppressWarnings("deprecation")
-	public String upload() throws Exception
-	{
-		for(int i=0;i<file.size();i++)
-		{
-			String root = ServletActionContext.getRequest().getRealPath("/upload");
+	public String upload() throws Exception {
+		for(int i=0;i<file.size();i++) {
+		    HttpServletRequest request = ServletActionContext.getRequest();
+		    String path = request.getSession().getServletContext().getRealPath("/upload");
+		    //如果上传目录不存在
+	        File dirFile = new File(path);
+	        if (!dirFile.exists()) 
+	        {   
+	            dirFile.mkdir();   
+	        }
 			
 			int idx = fileFileName.get(i).lastIndexOf(".");  
 			//文件后缀  
@@ -47,7 +54,7 @@ public class UploadifyAction extends ActionSupport
 			
 			newImgPath.add(newPath);
 
-			File destFile = new File(root, newPath);
+			File destFile = new File(path, newPath);
 			
 			FileUtils.copyFile(file.get(i), destFile);   
 		}

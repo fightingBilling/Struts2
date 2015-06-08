@@ -17,9 +17,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body> 
-    <s:form action="<%=path%>/dream/upload.action" theme="simple" enctype="multipart/form-data" method="post">
-          上传文件:<s:file name="file"></s:file>
-    <s:submit value="submit"></s:submit>
-    </s:form>
+    <!-- enctype 默认是 application/x-www-form-urlencoded -->
+    <form action="<%=path%>/dream/upload.action" enctype="multipart/form-data" method="post">
+                        上传文件：<input type="file" name="file">
+       <input type="submit" value="提交" />
+    </form>
   </body>
 </html>

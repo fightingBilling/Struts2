@@ -36,6 +36,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  font-family: Verdana, Arial;
 		}
 	</style>
+	<script type="text/javascript" src="<%=path%>/js/jquery-1.5.2.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		jQuery.fn.extend({
+			//阻止输入非数字 
+	        preventNumeric:function(){
+	            return $(this).keydown(function(event){
+	                var keyCode = event.which;  
+	                if (keyCode == 8 || keyCode == 9 || keyCode == 46 || (keyCode >= 48 && keyCode <=57))  
+	                return true;  
+	                else  
+	                return false;  
+	            }).focus(function(){
+	                this.style.imeMode='disabled'; 
+	            });
+	        }
+		});
+		$(":input[name=age]").preventNumeric();
+		$(":input[name=user.age]").preventNumeric();
+		$(":input[name=paramMap.age]").preventNumeric();
+	});
+	</script>
 
   </head>
   

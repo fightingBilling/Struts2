@@ -103,15 +103,15 @@ public class UploadServlet extends HttpServlet {
                       
                     InputStream in = item.getInputStream() ;  
                       
-                    int length = 0 ;  
+                    int len = 0 ;  
                     byte [] buf = new byte[1024] ;  
                       
                     System.out.println("获取上传文件的总共的容量："+item.getSize());  
   
                     // in.read(buf) 每次读到的数据存放在   buf 数组中  
-                    while( (length = in.read(buf) ) != -1){  
+                    while( (len = in.read(buf) ) != -1){  
                         //在   buf 数组中 取出数据 写到 （输出流）磁盘上  
-                        out.write(buf, 0, length);  
+                        out.write(buf, 0, len);  
                     }  
                       
                     in.close();  
