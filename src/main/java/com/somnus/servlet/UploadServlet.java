@@ -43,7 +43,7 @@ public class UploadServlet extends HttpServlet {
         //获得磁盘文件条目工厂  
         DiskFileItemFactory factory = new DiskFileItemFactory();  
         //获取文件需要上传到的路径  
-        String path = request.getRealPath("/upload");  
+        String path = request.getSession().getServletContext().getRealPath("/upload"); 
           
         //如果没以下两行设置的话，上传大的 文件 会占用 很多内存，  
         //设置暂时存放的 存储室 , 这个存储室，可以和 最终存储文件 的目录不同  
