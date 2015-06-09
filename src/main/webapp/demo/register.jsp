@@ -53,9 +53,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            });
 	        }
 		});
-		$(":input[name=age]").preventNumeric();
-		$(":input[name=user.age]").preventNumeric();
-		$(":input[name=paramMap.age]").preventNumeric();
+		$(":text[name=age]").preventNumeric();
+		$(":text[name='user.age']").preventNumeric();
+		$(":text[name='paramMap.age']").preventNumeric();
 	});
 	</script>
 
@@ -64,27 +64,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   	<%=path %>||<%=basePath %>
     <form id="fm" name="fm" action="<%=path %>/dream/register!propertyQuery.action" method="post">
-    username:<input type="text" name="username"><br>
-    password:<input type="password" name="password">
-    age:<input type="text" name="age">
-    <s:token></s:token>
-    <input type="submit" value="submit">
+        username:<input type="text" name="username">
+        password:<input type="password" name="password">
+        age:<input type="text" name="age">
+        <s:token></s:token>
+        <input type="submit" value="submit">
     </form>
     
     <form  id="fm2" name="fm2" action="<%=path %>/dream/register!modelQuery.action" method="post">
-    username:<input type="text" name="user.username"><br>
-    password:<input type="password" name="user.password"><br>
-    age:<input type="text" name="user.age">
-    <s:token></s:token>
-    <input type="submit" value="submit">
+        username:<input type="text" name="user.username">
+        password:<input type="password" name="user.password">
+        age:<input type="text" name="user.age">
+        <s:token></s:token>
+        <input type="submit" value="submit">
     </form>
     
      <form id="fm3" name="fm3"  action="<%=path %>/dream/register!mapQuery.action" method="post">
-    username:<input type="text" name="paramMap.username"><br>
-    password:<input type="password" name="paramMap.password"><br>
-    age:<input type="text" name="paramMap.age">
-    <s:token></s:token>
-    <input type="submit" value="submit">
+        username:<input type="text" name="paramMap.username">
+        password:<input type="password" name="paramMap.password">
+        age:<input type="text" name="paramMap.age">
+        <s:token></s:token>
+        <input type="submit" value="submit">
     </form>
   </body>
 </html>
