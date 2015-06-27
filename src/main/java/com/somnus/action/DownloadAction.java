@@ -15,37 +15,31 @@ import com.opensymphony.xwork2.ActionSupport;
 @Action(
 		value="download",
 		results = {
-				@Result(name = "success", type="stream",
-							params={"contentType","text/plain","contentDisposition","attachment;filename='${filename}'","inputName","downloadFile","bufferSize","1024"})
+				@Result(name = "success",type = "stream",
+							params = {"contentType","text/plain","contentDisposition","attachment;filename='${filename}'","inputName","downloadFile","bufferSize","1024"})
 				}
 )
-public class DownloadAction extends ActionSupport
-{
+public class DownloadAction extends ActionSupport{
 	private int num;
 	
 	private String filename;
 	
-	public InputStream getDownloadFile()
-	{
-		if(num==1)
-		{
+	public InputStream getDownloadFile(){
+		if(num==1){
 			this.filename = "baidu.gif";
 			return ServletActionContext.getServletContext().getResourceAsStream("/images/baidu.gif");
 		}
-		else if(num==2)
-		{
+		else if(num==2){
 			this.filename = "right.png";
 			return ServletActionContext.getServletContext().getResourceAsStream("/images/right.png");
 		}
-		else
-		{
+		else{
 			return null;
 		}
 		
 	}
 	
-	public String execute() throws Exception
-	{
+	public String execute() throws Exception{
 
 		return SUCCESS;
 	}

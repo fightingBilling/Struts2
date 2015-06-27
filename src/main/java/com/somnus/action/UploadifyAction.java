@@ -40,8 +40,7 @@ public class UploadifyAction extends ActionSupport{
 		    String path = request.getSession().getServletContext().getRealPath("/upload");
 		    //如果上传目录不存在
 	        File dirFile = new File(path);
-	        if (!dirFile.exists()) 
-	        {   
+	        if (!dirFile.exists()){   
 	            dirFile.mkdir();   
 	        }
 			

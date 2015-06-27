@@ -9,31 +9,25 @@ import com.opensymphony.xwork2.ActionSupport;
 @ParentPackage("struts2-common")
 @Namespace("/dream")
 @Action(
-		value="chain",
-		results = {
-				@Result(name = "success", type="chain",params={"namespace","/dream","actionName","dispatcher","email","${email}"})
-		}
+        value="chain",
+        results = {
+                @Result(name = "success", type="chain",params={"namespace","/dream","actionName","dispatcher","email","${email}"})
+        }
 )
-public class ResultTypeChainAction extends ActionSupport
-{
-	private String email;
-	
-	public String execute()
-	{
-		System.out.println("这是Chain中的值"+email);
-		return SUCCESS;
-	}
+public class ResultTypeChainAction extends ActionSupport {
+    private String email;
 
-	public String getEmail()
-	{
-		return email;
-	}
+    public String execute() {
+        System.out.println("这是Chain中的值" + email);
+        return SUCCESS;
+    }
 
-	public void setEmail(String email)
-	{
-		this.email = email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	
-	
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 }

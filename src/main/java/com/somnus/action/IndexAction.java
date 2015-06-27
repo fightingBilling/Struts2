@@ -25,8 +25,7 @@ import com.somnus.model.User;
 				@Result(name = "strmap", type = "json")
 		}
 )
-public class IndexAction extends ActionSupport
-{
+public class IndexAction extends ActionSupport{
 	private String message; // 使用json返回单个值
 	private User user; // 使用json返回对象
 	private List<User> userList; // 使用josn返回List对象
@@ -41,8 +40,7 @@ public class IndexAction extends ActionSupport
 	 * 
 	 * @return
 	 */
-	public String returnMessage()
-	{
+	public String returnMessage(){
 		this.message = "成功返回单个值";
 		return "message";
 	}
@@ -54,8 +52,7 @@ public class IndexAction extends ActionSupport
 	 * 
 	 * @return
 	 */
-	public String returnUser()
-	{
+	public String returnUser(){
 		user = new User();
 		user.setUsername("张三");
 		user.setPassword("000000");
@@ -69,8 +66,7 @@ public class IndexAction extends ActionSupport
 	 * 
 	 * @return
 	 */
-	public String returnList()
-	{
+	public String returnList(){
 		userList = new ArrayList<User>();
 		User u1 = new User();
 		u1.setUserid("10001");
@@ -102,8 +98,7 @@ public class IndexAction extends ActionSupport
 	 * 
 	 * @return
 	 */
-	public String returnMap()
-	{
+	public String returnMap(){
 		userMap = new LinkedHashMap<String, User>();
 		User u1 = new User();
 		u1.setUserid("10000");
@@ -127,8 +122,7 @@ public class IndexAction extends ActionSupport
 		userMap.put(u4.getUserid() , u4);
 		return "map";
 	}
-	public String returnStrList()
-	{
+	public String returnStrList(){
 		strList = new ArrayList<String>();
 		strList.add("张三");
 		strList.add("李四");
@@ -136,8 +130,7 @@ public class IndexAction extends ActionSupport
 		strList.add("赵六");
 		return "strlist";
 	}
-	public String returnStrMap()
-	{
+	public String returnStrMap(){
 		strMap = new LinkedHashMap<String,String>();
 		strMap.put("10000", "张三");
 		strMap.put("10001", "李四");
