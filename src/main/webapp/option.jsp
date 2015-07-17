@@ -16,62 +16,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	<script type="text/javascript" src="js/jquery-2.1.0.js"></script>
+	<script type="text/javascript" src="<%=path%>/js/jquery-2.1.0.js"></script>
+	<script type="text/javascript" src="<%=path%>/js/cxselect/jquery.cxselect.js"></script>
 	<script type="text/javascript">
 	$(function(){
-		$.ajax({
-				type: "POST",
-				url: "<%=path%>/region.action",
-				dataType: "json",
-				data: {'provinceParam':$("#region :input:first").val()},
-				success: function(data)
-				{
-					$.each(data.provinceMap,function(key,value)
-					{
-						$("#region :input:first").append("<option value="+key+">"+value+"</option>");
-					});
-				}
-			});
-		
-		$("#region :input:first").change(function()
-		{
-			$.ajax({
-				type: "POST",
-				url: "<%=path%>/region.action",
-				dataType: "json",
-				data: {'provinceParam':$("#region :input:first").val()},
-				success: function(data)
-				{
-					$("#region :input:eq(1)").empty().append("<option value='-1'>请选择</option>");
-					$("#region :input:eq(2)").empty().append("<option value='-1'>请选择</option>");
-					$.each(data.cityMap,function(key,value)
-					{
-						$("#region :input:eq(1)").append("<option value="+key+">"+value+"</option>");
-					});
-				}
-			});
-		});
-		
-		$("#region :input:eq(1)").change(function()
-		{
-			$.ajax({
-				type: "POST",
-				url: "<%=path%>/region.action",
-				dataType: "json",
-				data: {'cityParam':$("#region :input:eq(1)").val(),'provinceParam':$("#region :input:first").val()},
-				success: function(data)
-				{
-					if($("#region :input:eq(2)").size()>0)
-					{
-						$("#region :input:eq(2)").empty();
-					}
-					$.each(data.districtMap,function(key,value)
-					{
-						$("#region :input:eq(2)").append("<option value="+key+">"+value+"</option>");
-					});
-				}
-			});
-		});
+		$('#element_id').cxSelect({
+		  url: '<%=path%>/js/cxselect/cityData.min.json',
+		  selects: ['province', 'city', 'area']
+		}); 
 	});
 	</script>
   </head>
@@ -79,15 +31,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
     <form id="region" method="post">
     	省市区:
-    	<select name="province" id="province"  style="width:70px">
-			<option value="-1">请选择</option>
-		</select>
-		<select name="city"  id="city"  style="width:70px">
-			<option value="-1">请选择</option>
-		</select>
-		<select name="district" id="district"  style="width:70px">
-			<option value="-1">请选择</option>
-		</select>
+    	<div id="element_id"> 
+            <select class="province" style="width:150px;"></select>
+            <select class="city" style="width:150px;"></select>
+            <select class="area" style="width:150px;"></select>
+        </div>
     </form>
   </body>
 </html>
