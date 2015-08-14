@@ -14,38 +14,31 @@
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 </head>
-<link rel="stylesheet" type="text/css" href="css/complete.css">
+<link rel="stylesheet" type="text/css" href="<%=path%>/style/normalize.css">
+<link href="<%=path%>/style/jquery-ui.custom.min.css" rel="stylesheet" type="text/css" >
 <style type="text/css">
-	ul,li {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-	}
 	#wrapper{
-		width:800px;
-		height:800px;
-		position:relative;
+		width:600px;
+		height:300px;
+		margin:80px auto;
 	}
 	.logo{
-		width:400px;
 		height:129px;
-		position:absolute;
-		left:300px;
-		top:50px;
+		padding:0 165px;
 	}
 	.logo img{
-		margin:0 65px 0 65px;
 		cursor: pointer;
 	}
 	.nav{
-		width:400px;
 		height:30px;
-		position:absolute;
-		left:300px;
-		top:179px;
+		padding:0 120px;
 	}
 	.nav ul{
-		margin:0 25px 0 25px;
+		height:30px;
+		width:360px;
+		margin: 0;
+        padding: 0;
+        list-style: none;
 	}
 	.nav ul li{
 		float:left;
@@ -57,11 +50,8 @@
 		color:blue;
 	}
 	.ser{
-		width:500px;
 		height:30px;
-		position:absolute;
-		left:300px;
-		top:209px;
+		padding:0 50px;
 	}
 	.ser input[type=text]{
 		border:1px solid #666;
@@ -74,104 +64,33 @@
 		height:30px;
 		margin-left:10px;
 	}
-	.ser #completeDiv{
-	  width:398px;
-	  border:1px solid #666;
-	  border-top:none;
-	  display:none;
-	  position:absolute;
-	  top:30px;
-	 }
-	.ser #completeDiv ul li{
-		line-height:15px;
-	 	padding:4px;
-	 	font-size:15px;
-	 	color:#000;
-	 }
-	.over{
-	  background:#E0E0E0;
-	  color:#ffffff;
-	  cursor: default;
-	 }
 </style>
-<script type="text/javascript" src="<%=path%>/js/jquery-1.5.2.js"></script>
+<script type="text/javascript" src="<%=path%>/js/jquery-2.1.0.js"></script>
+<script src="<%=path%>/js/jquery-ui.custom.min.js" type="text/javascript"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-			$("#wrapper div.ser :input[name=key]").keyup(function(event) 
-			{ //键盘按下
-					if (event.keyCode == 38) 
-					{ //上e
-						if (this.index == undefined || this.index <= 0) 
-						{
-							this.index = $("#completeDiv ul li").size() - 1;
-						} 
-						else
-						{
-							this.index--;
-						}
-						var li = $("#completeDiv ul li").eq(this.index);
-						li.addClass("over").siblings().removeClass("over");
-						$(this).first().val(li.text());
-					} 
-					else if (event.keyCode == 40)
-					{ //下
-							if (this.index == undefined || this.index >= $("#completeDiv ul li").size() - 1) 
-							{
-								this.index = 0;
-							} 
-							else 
-							{
-								this.index++;
-							}
-							var li = $("#completeDiv ul li").eq(this.index);
-							li.addClass("over").siblings().removeClass("over");
-							$(this).first().val(li.text());
-					} 
-					else if (event.keyCode == 27) 
-					{ //ESC
-							$('#completeDiv').hide();
-					}
-					else if (event.keyCode == 13)
-					{ //回车
-							window.location.href = "http://www.baidu.com/s?wd="+ $("div.ser :input[name=key]").val();
-							this.index = undefined;
-					} 
-					else 
-					{
-							$.ajax({
-									url : "baidu.action",
-									type : "post",
-									dataType : "json",
-									data : {"text" : $("div.ser :input[name=key]").val()},
-									success : function(data) 
-									{
-										if (data == null || data.list.length == 0) 
-										{
-											$("#completeDiv").hide();
-											return;
-										}
-										$("#completeDiv").empty(); 
-										var ul = $("<ul></ul>");
-										$.each(data.list,function(index,item) 
-										{ 
-											var li = $("<li></li>").text(item).mouseover(function() 
-											{
-												$(this).addClass("over").siblings().removeClass("over");
-												$("div.ser :input[name=key]").first().val($(this).text());
-											}).click(function() 
-											{
-												$("div.ser :input[name=key]").first().val($(this).text());
-												$("#completeDiv").hide();
-											});
-											ul.append(li);
-										});
-										$("#completeDiv").append(ul).show(); 
-									}
-								});
-					 }
-			}).blur(function(){
-				$("#completeDiv").hide(); //层隐藏
-			});
+	$(function(){
+		$(":input[name=key]").autocomplete({
+            source: function(request, response){
+                $.ajax({
+                    type : 'post',
+                    url : '<%=path%>/baidu.action',
+                    dataType : 'json',
+                    data : {'text':request.term},
+                    success : function(data) {
+                         response($.map(data.list, function(item) {
+                        	 console.info(item);
+                             return {
+                                 label: item,
+                                 value: item
+                             }
+                         }));
+                    }
+                });
+            },
+            /* minLength:1, */      //默认为1，触发补全列表最少输入字符数
+            /* delay:0 */           //默认为300 毫秒，延迟显示设置
+            /* autoFocus:true */    //设置为true 时，第一个项目会自动被选定
+        });
 	});
 </script>
 <body>
@@ -192,7 +111,6 @@
 		<div class="ser">
 			<input type="text" name="key"/>
 			<input type="submit" name="sub"  value="百度一下">
-			<div id="completeDiv"></div>
 		</div>
 	</div>
 </body>
