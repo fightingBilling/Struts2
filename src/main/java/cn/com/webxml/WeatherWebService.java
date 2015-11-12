@@ -17,7 +17,7 @@ import javax.xml.ws.Service;
  * 
  */
 @WebServiceClient(name = "WeatherWebService", 
-                  wsdlLocation = "http://localhost:9999/Struts2/weather.xml",
+                  wsdlLocation = "http://localhost:8080/Struts2/weather.xml",
                   targetNamespace = "http://WebXml.com.cn/") 
 public class WeatherWebService extends Service {
 
@@ -31,11 +31,11 @@ public class WeatherWebService extends Service {
     static {
         URL url = null;
         try {
-            url = new URL("http://localhost:9999/Struts2/weather.xml");
+            url = new URL("http://localhost:8080/Struts2/weather.xml");
         } catch (MalformedURLException e) {
             java.util.logging.Logger.getLogger(WeatherWebService.class.getName())
                 .log(java.util.logging.Level.INFO, 
-                     "Can not initialize the default wsdl from {0}", "http://localhost:9999/Struts2/weather.xml");
+                     "Can not initialize the default wsdl from {0}", "http://localhost:8080/Struts2/weather.xml");
         }
         WSDL_LOCATION = url;
     }
